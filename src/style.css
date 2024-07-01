@@ -5,9 +5,23 @@ body {
 header {
     height: 50px;
     width: 100%;
+    background-color: #07242E;
 }
 
 footer {
     height: 50px;
     width: 100%;
+    background-color: #07242E;
+
+}
+
+.wrap {
+    max-width: 1900px;
+    margin: 0 auto;
+    background-color: #051721;
+}
+
+#content {
+    background-color: #051721;
+    height: 300px;
 }
