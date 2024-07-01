@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,24 +9,48 @@
     <script src="./script.js"></script>
     <link rel="icon" type="image/png" href="./img/icons/pokeball.png">
 </head>
+
 <body onload="init()">
     <header>
-
-
-
+        <div class="wrap-header">
+            <div class="left-header">
+                <img class="logo-img" src="./img/icons/pokemon-logo.svg">
+                <span class="logo-headline">Pokedex</span>
+            </div>
+            <input placeholder="search..." class="search-bar">
+        </div>
     </header>
 
     <div class="wrap">
 
         <div id="content">
-            
+            <div class="card">
+                <div class="card-top">
+                    <span id="pokemon_id">
+                        #1
+                    </span>
+                    <span id="pokemon-name">
+                        Bulbasaur
+                    </span>
+                </div>
+                <div class="card-img">
+                    <img id="pokemon-img" src="#">
+                </div>
+                <div class="card-bottom">
+                    <div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        
+
     </div>
 
     <footer>
-
-
+        <span class="copyright">
+            © 2024 Kieran Noel Mai
+        </span>
     </footer>
 </body>
+
 </html>
