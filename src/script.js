@@ -235,10 +235,10 @@ function fillMain(i) {
 function createMainHtml(i) {
     const pokemon = pokemons[i];
     return `
-    height:    ${pokemon.height} m </br></br>
-    weight:    ${pokemon.weight} kg </br></br>
-    base experience: ${pokemon.base_experience} </br></br>
-    abilities:    ${pokemon.abilities[0].ability.name} ${isAbility(i)}</br></br>
+    height: &emsp; &emsp; &emsp; &emsp; ${pokemon.height} m </br></br>
+    weight:  &emsp; &emsp; &emsp; &emsp;${pokemon.weight} kg </br></br>
+    base experience:&ensp; ${pokemon.base_experience} xp</br></br>
+    abilities: &emsp;  &emsp;&emsp;&emsp; ${pokemon.abilities[0].ability.name} ${isAbility(i)}</br></br>
     
     `;
 }
@@ -273,7 +273,7 @@ function isAbility(i) {
     const pokemon = pokemons[i];
     if (pokemon.abilities[1]) {
         if (pokemon.abilities[2]) {
-            return `, ${pokemon.abilities[1].ability.name}, ${pokemon.abilities[2].ability.name}`;
+            return `, ${pokemon.abilities[1].ability.name}, </br> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; ${pokemon.abilities[2].ability.name}`;
         } else {
             return `, ${pokemon.abilities[1].ability.name}`;
         } 
