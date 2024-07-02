@@ -1,5 +1,4 @@
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/"
-const ALL_URL = "https://pokeapi.co/api/v2/pokemon"
 const EVO_URL = "https://pokeapi.co/api/v2/evolution-chain/"
 
 let pokemons = [];
@@ -42,11 +41,11 @@ function renderInfoCard(index) {
     const content = document.getElementById('info-content');
     content.innerHTML = '';
     const pokemon = pokemons[index];
-    content.innerHTML = createInfoHtml(pokemon);
+    content.innerHTML = createInfoHtml(pokemon,index);
     document.body.style.overflow = "hidden";
 }
 
-function createInfoHtml(pokemon) {
+function createInfoHtml(pokemon,i) {
     return `
     <div class="info-container" onclick="closeInfoCard()">
         <div class="info-card" onclick="event.stopPropagation()">
@@ -62,8 +61,18 @@ function createInfoHtml(pokemon) {
                 <img id="pokemon-img" src="${pokemon.sprites.front_default}">
             </div>
             <div class="info-card-bottom">
-                <div class="evolution">
+                <div class="poke-types">
+                    <img class="type-icon" src="./img/icons/${pokemon.types[0].type.name}.png">
+                    ${addAdditionalType(i)}
+                </div> 
+                <div class="reiter">
+                    <div class="reit" id="main" onclick="fillMain(${i})">main</div>
+                    <div class="reit-sep"></div>
+                    <div class="reit-mid" id="stats" onclick="fillStats(${i})">stats</div>
+                    <div class="reit-sep"></div>
+                    <div class="reit" id="evo" onclick="fillEvo(${i})">evo</div>
                 </div>
+                <div class="poke-stats" id="poke-stats"></div>
             </div>
         </div>
     </div>
@@ -86,8 +95,8 @@ function createCardHtml(i) {
             <img id="pokemon-img" src="${pokemon.sprites.front_default}">
         </div>
         <div class="card-bottom">
-            <div>
-            </div>
+                <img class="type-icon" src="./img/icons/${pokemon.types[0].type.name}.png">
+                ${addAdditionalType(i)}
         </div>
     </div>
     `;
@@ -206,4 +215,67 @@ async function loadMore() {
     console.log(pokemons);
     renderPokemons();
     loadButton();
+}
+
+function addAdditionalType(i) {
+    const pokemon = pokemons[i];
+    if (pokemon.types[1]) {
+        return `<img class="type-icon m-l-10" src="./img/icons/${pokemon.types[1].type.name}.png">`;
+    } else {
+        return ``;
+    }
+}
+
+function fillMain(i) {
+    const content = document.getElementById('poke-stats');
+    content.innerHTML = ''; 
+    content.innerHTML = createMainHtml(i);  
+}
+
+function createMainHtml(i) {
+    const pokemon = pokemons[i];
+    return `
+    height:    ${pokemon.height} m </br></br>
+    weight:    ${pokemon.weight} kg </br></br>
+    base experience: ${pokemon.base_experience} </br></br>
+    abilities:    ${pokemon.abilities[0].ability.name} ${isAbility(i)}</br></br>
+    
+    `;
+}
+
+function fillStats(i) {
+    const content = document.getElementById('poke-stats');
+    content.innerHTML = '';
+    content.innerHTML = createStatsHtml(i); 
+}
+
+function createStatsHtml(i) {
+    const pokemon = pokemons[i];
+    return `
+    height:    ${pokemon.height} </ br>
+    `;
+}
+
+function fillEvo(i) {
+    const content = document.getElementById('poke-stats');
+    content.innerHTML = '';
+    content.innerHTML = createEvoHtml(i); 
+}
+
+function createEvoHtml(i) {
+    const pokemon = pokemons[i];
+    return `
+    height:    ${pokemon.height} </ br>
+    `;
+}
+
+function isAbility(i) {
+    const pokemon = pokemons[i];
+    if (pokemon.abilities[1]) {
+        if (pokemon.abilities[2]) {
+            return `, ${pokemon.abilities[1].ability.name}, ${pokemon.abilities[2].ability.name}`;
+        } else {
+            return `, ${pokemon.abilities[1].ability.name}`;
+        } 
+    } else return
 }

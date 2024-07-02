@@ -145,12 +145,12 @@ footer {
 .card-bottom {
     background-color: #07242E;
     height: 60px;
-    width: 100%;
+    width: 220px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .card-img {
@@ -204,13 +204,17 @@ footer {
 }
 
 .info-card-img {
-    height: 400px;
+    height: 250px;
     width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 }
 
 .info-card-img img {
-    height: 400px;
-    width: 100%;
+    height: 260px;
+    aspect-ratio: 1/1;
+    margin-bottom: -25px;
 }
 
 #info-card-id {
@@ -222,16 +226,74 @@ footer {
     font-size: 28px;
 }
 
-.evolution {
+.reiter {
+    height: 50px;
+    width: 400px;
+    background-color: #0b3a49;
+    display: flex;
+    flex-direction: row;
+}
+
+.poke-types {
+    height: 60px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-top: 2px solid rgba(255, 255, 255, 0.505);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.363);
+}
+
+.poke-stats {
+    width: 400px;
+    height: 200px;
+    margin-top: 10px;
+    display: flex;
+    padding: 20px 20px;
+}
+
+.reit {
+    width: 131.3333px;
+    padding-top: 16px;
+    height: 34px;
+    border-bottom: 4px solid #0b3a49;
+    text-align: center;
+}
+
+.reit:hover {
+    border-bottom: 4px solid orange;
+}
+
+.reit-mid {
+    padding-top: 16px;
+    height: 34px;
+    border-bottom: 4px solid #0b3a49;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.reit-mid:hover {
+    border-bottom: 4px solid orange;
+}
+
+.reit-sep {
+    height: 50px;
+    width: 2px;
+    background-color: #042029;
 }
 
 #load-button {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.m-l-10 {
+    margin-left: 20px;
+}
+
+.m-r-20 {
+    margin-right: 60px;
 }
 
 .button {
@@ -255,6 +317,10 @@ footer {
     transform: scale(0.95);
 }
 
+.type-icon {
+    width: 40px;
+    height: 40px;
+}
 
 
 .normal {
