@@ -43,6 +43,7 @@ function renderInfoCard(index) {
     const pokemon = pokemons[index];
     content.innerHTML = createInfoHtml(pokemon,index);
     document.body.style.overflow = "hidden";
+    fillMain(index);
 }
 
 function createInfoHtml(pokemon,i) {
@@ -238,7 +239,7 @@ function createMainHtml(i) {
     height: &emsp; &emsp; &emsp; &emsp; ${pokemon.height} m </br></br>
     weight:  &emsp; &emsp; &emsp; &emsp;${pokemon.weight} kg </br></br>
     base experience:&ensp; ${pokemon.base_experience} xp</br></br>
-    abilities: &emsp;  &emsp;&emsp;&emsp; ${pokemon.abilities[0].ability.name} ${isAbility(i)}</br></br>
+    abilities: &emsp;  &emsp;&emsp;&emsp; ${pokemon.abilities[0].ability.name}${isAbility(i)}</br></br>
     
     `;
 }
@@ -277,5 +278,5 @@ function isAbility(i) {
         } else {
             return `, ${pokemon.abilities[1].ability.name}`;
         } 
-    } else return
+    } else return ``;
 }
