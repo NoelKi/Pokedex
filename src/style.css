@@ -11,6 +11,7 @@ header {
     background-color: #07242E;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
 footer {
@@ -20,7 +21,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    position: sticky;
     bottom: 0;
 }
 
@@ -58,7 +59,12 @@ footer {
 }
 
 #content {
+    min-height: calc(100vh - 280px);
     padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .search-bar {
@@ -75,13 +81,25 @@ footer {
     border: 2px solid red;
 }
 
+.spinner {
+    height: 200px;
+    width: 200px;
+}
+
+.spinner img {
+    width: 100%;
+    height: 100%;
+    filter: opacity(0.4);
+    animation: spin 2s linear infinite;
+}
+
 .copyright {
     font-size: 12px;
     color: #575e60;
 }
 
 .card {
-    margin: 0;
+    margin: 10px;
     width: 220px;
     height: 300px;
     background-color: transparent;
@@ -90,8 +108,12 @@ footer {
 }
 
 .card:hover {
-    transform: scale(1.01);
+    transform: scale(0.98);
     box-shadow: 0 0 20px 2px rgba(91, 91, 91, 0.471);
+}
+
+.card:hover .card-img img {
+    transform: scale(1.1);
 }
 
 .card-top {
@@ -101,7 +123,7 @@ footer {
     flex-direction: row;
     height: 40px;
     width: 100%;
-    background-color:  #07242E;
+    background-color: #07242E;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     font-size: 18px;
@@ -116,7 +138,7 @@ footer {
 }
 
 .card-bottom {
-    background-color:  #07242E;
+    background-color: #07242E;
     height: 60px;
     width: 100%;
     border-bottom-right-radius: 10px;
@@ -127,6 +149,158 @@ footer {
 }
 
 .card-img {
-    width: 100%;
+    width: 220px;
     height: 200px;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    filter: drop-shadow(5px 10px 5px #222);
+    transition: .25s;
+}
+
+.info-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #575e607d;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-card {
+    width: 400px;
+    height: 700px;
+    background-color: #07242E;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.info-card-top {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.info-card-bottom {
+    width: 100%;
+    height: 90px;
+}
+
+.info-card-img {
+    height: 400px;
+    width: 100%;
+}
+
+.info-card-img img {
+    height: 400px;
+    width: 100%;
+}
+
+#info-card-id {
+    font-size: 28px;
+    padding: 0px 24px;
+}
+
+#info-card-name {
+    font-size: 28px;
+}
+
+.evolution {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.normal {
+    background-color: #A8A77A;
+}
+
+.fire {
+    background-color: #EE8130;
+}
+
+.water {
+    background-color: #6390F0;
+}
+
+.electric {
+    background-color: #F7D02C;
+}
+
+.grass {
+    background-color: #7AC74C;
+}
+
+.ice {
+    background-color: #96D9D6;
+}
+
+.fighting {
+    background-color: #C22E28;
+}
+
+.poison {
+    background-color: #A33EA1;
+}
+
+.ground {
+    background-color: #E2BF65;
+}
+
+.flying {
+    background-color: #A98FF3;
+}
+
+.psychic {
+    background-color: #F95587;
+}
+
+.bug {
+    background-color: #A6B91A;
+}
+
+.rock {
+    background-color: #B6A136;
+}
+
+.ghost {
+    background-color: #735797;
+}
+
+.dragon {
+    background-color: #6F35FC;
+}
+
+.dark {
+    background-color: #705746;
+}
+
+.steel {
+    background-color: #B7B7CE;
+}
+
+.fairy {
+    background-color: #D685AD;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }

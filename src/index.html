@@ -17,31 +17,15 @@
                 <img class="logo-img" src="./img/icons/pokemon-logo.svg" alt="pokemon">
                 <span class="logo-headline">Pokedex</span>
             </div>
-            <input placeholder="search..." type="search" class="search-bar">
+            <input placeholder="search..." type="search" class="search-bar" id="search" oninput="filterNames(event)">
         </div>
     </header>
 
     <div class="wrap">
 
         <div id="content">
-            <div class="card">
-                <div class="card-top">
-                    <span id="pokemon_id">
-                        #1
-                    </span>
-                    <span id="pokemon-name">
-                        Bulbasaur
-                    </span>
-                </div>
-                <div class="card-img">
-                    <img id="pokemon-img" src="#">
-                </div>
-                <div class="card-bottom">
-                    <div>
-                    </div>
-                </div>
 
-            </div>
+            
         </div>
 
     </div>
@@ -51,6 +35,10 @@
             © 2024 Kieran Noel Mai
         </span>
     </footer>
+
+    <div id="info-content">
+    </div>
+    
 </body>
 
 </html>
