@@ -1,7 +1,12 @@
+@font-face {
+    font-family: 'exo_2_med';
+    src: url(./fonts/Exo_2/static/Exo2-Medium.ttf);
+}
+
 body {
     margin: 0;
     color: white;
-    font-family: sans-serif;
+    font-family: 'exo_2_med', sans-serif;
     background-color: #051721;
 }
 
@@ -223,6 +228,35 @@ footer {
     justify-content: center;
 }
 
+#load-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    width: 180px;
+    height: 60px;
+    margin-bottom: 200px;
+    border-radius: 5px;
+    background-color: #0b3a49;
+    border-style: none;
+    font-size: 16px;
+    color: white;
+    font-family: 'exo_2_med', sans-serif;
+    transition: .01s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:active {
+    background-color: #0c3f51;
+    transform: scale(0.95);
+}
+
+
+
 .normal {
     background-color: #A8A77A;
 }
@@ -294,6 +328,32 @@ footer {
 .fairy {
     background-color: #D685AD;
 }
+
+.loader {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 32px 0 #fff, -32px 0 #fff;
+    position: relative;
+    animation: flash 0.5s ease-out infinite alternate;
+  }
+  
+  @keyframes flash {
+    0% {
+      background-color: #FFF2;
+      box-shadow: 32px 0 #FFF2, -32px 0 #FFF;
+    }
+    50% {
+      background-color: #FFF;
+      box-shadow: 32px 0 #FFF2, -32px 0 #FFF2;
+    }
+    100% {
+      background-color: #FFF2;
+      box-shadow: 32px 0 #FFF, -32px 0 #FFF2;
+    }
+  }
+        
 
 @keyframes spin {
     from {

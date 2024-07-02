@@ -4,30 +4,29 @@ const EVO_URL = "https://pokeapi.co/api/v2/evolution-chain/"
 
 let pokemons = [];
 let names = [];
+let loadCounter = 20;
 
 async function init() {
     showLoadingSpinner();
-    await loadPokemons(100, 0);
+    await loadPokemons(20, 0);
+    loadButton();
     console.log(pokemons);
     renderPokemons();
-    // document.getElementById('search').addEventListener('keydown',function(e){filterNames()});
 }
 
 async function loadPokemons(amount = 1, offset = 0) {
-    for (let i = offset + 1; i < amount + 1; i++) {
+    for (let i = offset + 1; i < amount + 1 + offset; i++) {
         let pokemonResponse = await getAPokemon(`${i}`);
         pokemons.push(pokemonResponse);
         names.push(pokemonResponse.name); 
     }
 }
 
-async function loadPokemonsFast(amount = 1, offset = 0) {
-    let pokemonResponse = await getAPokemon(`?limit=${amount}&offset=${offset}`);
+async function loadPokemonNames(amount = 10, offset = 0) {
+    let pokemonResponse = await getPokemons(`?limit=${amount}&offset=${offset}`);
     console.log(pokemonResponse);
     pokemons.push(pokemonResponse.results.map(pokemon => pokemon.name));
-    
     names.push(pokemons.name); 
-
 }
 
 function renderPokemons() {
@@ -109,7 +108,7 @@ async function getAPokemon(path = "") {
 
 async function getPokemons(path = "") {
     try {
-        const response = await fetch(BASE_URL + path);
+        const response = await fetch(ALL_URL + path);
         if (!response.ok) {
             throw new Error('network does not answer correctly');
         }
@@ -119,7 +118,6 @@ async function getPokemons(path = "") {
         console.error('Fehler:', error);
     }
 }
-
 
 async function getTheEvolution(path = "") {
     try {
@@ -178,3 +176,34 @@ function filterNames(event) {
     }
 }
 
+function loadButton() {
+    const button = document.getElementById('load-button');
+    button.innerHTML = createButton();
+}
+
+function createButton() {
+    return `
+    <button class="button" onclick="loadMore()">Load more ...</button>
+    `;
+}
+
+function loadButtonSpinner() {
+    const button = document.getElementById('load-button');
+    button.innerHTML = createButtonSpinner();
+}
+
+function createButtonSpinner() {
+    return `
+    <button class="button"><span class="loader">
+    </span></button>
+    `;
+}
+
+async function loadMore() {
+    loadButtonSpinner();
+    await loadPokemons(20,loadCounter);
+    loadCounter = loadCounter + 20;
+    console.log(pokemons);
+    renderPokemons();
+    loadButton();
+}
