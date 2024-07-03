@@ -5,13 +5,13 @@ let pokemons = [];
 let evolutions = [];
 let evoNames = [];
 let names = [];
-let loadCounter = 20;
+let loadCounter = 10;
 
 
 async function init() {
     showLoadingSpinner();
-    await loadPokemons(20, 0);
-    await loadEvolution(100, 0);
+    await loadPokemons(10, 0);
+    await loadEvolution(10, 0);
     console.log(evolutions);
     console.log(pokemons);
     loadButton();
@@ -261,8 +261,9 @@ function createButtonSpinner() {
 
 async function loadMore() {
     loadButtonSpinner();
-    await loadPokemons(20, loadCounter);
-    loadCounter = loadCounter + 20;
+    await loadPokemons(10, loadCounter);
+    await loadEvolution(10, loadCounter);
+    loadCounter = loadCounter + 10;
     console.log(pokemons);
     renderPokemons();
     loadButton();
