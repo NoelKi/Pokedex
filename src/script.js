@@ -280,17 +280,31 @@ function addAdditionalType(i) {
 function fillMain(i) {
     const content = document.getElementById('poke-stats');
     content.innerHTML = '';
-    content.innerHTML = createMainHtml(i);
+    content.innerHTML = createMainLeftHtml();
+    content.innerHTML += createMainRightHtml(i);
 }
 
-function createMainHtml(i) {
+function createMainLeftHtml() {
+    return `
+    <div style="padding-right: 20px">
+    height:</br></br>
+    weight:</br></br>
+    base experience: </br></br>
+    abilities:</br></br>
+    </div>
+    `;
+}
+
+function createMainRightHtml(i) {
     const pokemon = pokemons[i];
     return `
-    height: &emsp; &emsp; &emsp; &emsp; ${pokemon.height / 10} m </br></br>
-    weight:  &emsp; &emsp; &emsp; &emsp;${pokemon.weight / 10} kg </br></br>
-    base experience:&ensp; ${pokemon.base_experience} xp</br></br>
-    abilities: &emsp;  &emsp;&emsp;&emsp; ${pokemon.abilities[0].ability.name}${isAbility(i)}</br></br>
-    
+    <div>
+    ${pokemon.height / 10} m </br></br>
+    ${pokemon.weight / 10} kg </br></br>
+    <p class="line-break"></br></p>
+    ${pokemon.base_experience} xp</br></br>
+    ${pokemon.abilities[0].ability.name}${isAbility(i)}</br></br>
+    </div>
     `;
 }
 
@@ -419,7 +433,6 @@ function isAbility(i) {
     if (pokemon.abilities[1]) {
         if (pokemon.abilities[2]) {
             return `, ${pokemon.abilities[1].ability.name}, 
-            </br> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
             ${pokemon.abilities[2].ability.name}`;
         } else {
             return `, ${pokemon.abilities[1].ability.name}`;

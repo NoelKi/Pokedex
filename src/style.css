@@ -33,6 +33,7 @@ footer {
 p {
     margin: 0;
 }
+
 .wrap {
     max-width: 1900px;
     margin: 0 auto;
@@ -135,6 +136,10 @@ p {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     font-size: 18px;
+}
+
+.line-break {
+    display: none;
 }
 
 #pokemon_id {
@@ -451,14 +456,14 @@ p {
     height: 14px;
     width: 140px;
     display: flex;
-  }
-  
-  #progressbar>div {
+}
+
+#progressbar>div {
     background-color: rgb(145, 255, 0);
     height: 10px;
     border-radius: 5px;
     margin-top: 2px;
-  }
+}
 
 .loader {
     width: 10px;
@@ -468,23 +473,25 @@ p {
     box-shadow: 32px 0 #fff, -32px 0 #fff;
     position: relative;
     animation: flash 0.5s ease-out infinite alternate;
-  }
-  
-  @keyframes flash {
+}
+
+@keyframes flash {
     0% {
-      background-color: #FFF2;
-      box-shadow: 32px 0 #FFF2, -32px 0 #FFF;
+        background-color: #FFF2;
+        box-shadow: 32px 0 #FFF2, -32px 0 #FFF;
     }
+
     50% {
-      background-color: #FFF;
-      box-shadow: 32px 0 #FFF2, -32px 0 #FFF2;
+        background-color: #FFF;
+        box-shadow: 32px 0 #FFF2, -32px 0 #FFF2;
     }
+
     100% {
-      background-color: #FFF2;
-      box-shadow: 32px 0 #FFF, -32px 0 #FFF2;
+        background-color: #FFF2;
+        box-shadow: 32px 0 #FFF, -32px 0 #FFF2;
     }
-  }
-        
+}
+
 
 @keyframes spin {
     from {
@@ -497,5 +504,81 @@ p {
 }
 
 @media(max-width:580px) {
+    .info-card {
+        width: 300px;
+        height: 600px;
+    }
+
+    .info-card-top {
+        height: 60px;
+    }
+
+    .info-card-img {
+        height: 200px;
+    }
+
+    .info-card-img img{
+        height: 220px;
+    }
+
+    .reiter {
+        width: 300px;
+    }
+
+    .reit {
+        width: 100px;
+    }
+
+    #poke-stats {
+        width: 280px;
+        /* display: flex;
+        align-items: center;
+        flex-direction: row; */
+        /* padding: 0px; */
+    }
+
+    .poke-stats {
+        width: 280px;
+    }
+
+    .evolution {
+        width: 300px;
+        justify-content: space-between;
+    }
+
+    .evo {
+        width: 80px;
+    }
+
+    .evo img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .evolution-arrow {
+        width: 10px;
+        height: 10px;
+        padding-bottom: 25px;
+    }
+
+    .bars {
+        margin-left: -20px;
+    }
+
+    #progressbar {
+        width: 70px;
+    }
+
+    .line-break {
+        display: block;
+    }
+
+    footer {
+        height: 60px;
+    }
+
+    header {
+        height: 70px;
+    }
 
 }
