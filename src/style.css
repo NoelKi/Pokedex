@@ -30,6 +30,9 @@ footer {
     bottom: 0;
 }
 
+p {
+    margin: 0;
+}
 .wrap {
     max-width: 1900px;
     margin: 0 auto;
@@ -394,6 +397,56 @@ footer {
 .fairy {
     background-color: #D685AD;
 }
+
+.bar-stats {
+    height: 175px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bars {
+    padding-left: 50px;
+    height: 175px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.evo img {
+    width: 100px;
+    height: 100px;
+}
+
+.evolution {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    height: 180px;
+    width: 380px;
+}
+
+.evolution-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 50px;
+}
+
+#progressbar {
+    background-color: rgb(109, 109, 109);
+    border-radius: 9px;
+    padding: 2px 4px;
+    height: 14px;
+    width: 140px;
+  }
+  
+  #progressbar>div {
+    background-color: rgb(145, 255, 0);
+    height: 10px;
+    border-radius: 5px;
+    margin-top: 2px;
+  }
 
 .loader {
     width: 10px;
