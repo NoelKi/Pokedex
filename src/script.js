@@ -191,7 +191,6 @@ async function loadMore() {
     loadButtonSpinner();
     await loadPokemons(10, loadCounter);
     loadCounter = loadCounter + 10;
-    console.log(pokemons);
     renderPokemons();
     loadButton();
 }
@@ -272,4 +271,16 @@ function isAbility(i) {
             return `, ${pokemon.abilities[1].ability.name}`;
         }
     } else return ``;
+}
+
+function nextPokemon(i) {
+    if (i != names.length-1) {
+        renderInfoCard(i+1)
+    } else {
+        closeInfoCard();
+    }
+}
+
+function previousPokemon(i) {
+    renderInfoCard(i-1)
 }

@@ -1,4 +1,5 @@
 function createInfoHtml(pokemon, i) {
+    const previousButtonStyle = (i === 0) ? 'display: none;' : '';
     return `
     <div class="info-container" onclick="closeInfoCard()">
         <div class="info-card" onclick="event.stopPropagation()">
@@ -15,8 +16,18 @@ function createInfoHtml(pokemon, i) {
             </div>
             <div class="info-card-bottom">
                 <div class="poke-types">
+                    <div class="nav-btn" >
+                        <button id="previous-btn" style="${previousButtonStyle}" onclick="previousPokemon(${i})"> 
+                            <img class="arrow" src="./img/icons/left-arrow.png" alt="left-button">
+                        </button>
+                    </div>
                     <img class="type-icon" src="./img/icons/${pokemon.types[0].type.name}.png">
                     ${addAdditionalType(i)}
+                    <div class="nav-btn">
+                        <button onclick="nextPokemon(${i})"> 
+                            <img class="arrow" id="after-btn" src="./img/icons/left-arrow.png" alt="left-button">
+                        </button>
+                    </div>
                 </div> 
                 <div class="reiter">
                     <div class="reit" id="main" onclick="fillMain(${i})">main</div>
@@ -28,6 +39,7 @@ function createInfoHtml(pokemon, i) {
                 <div class="poke-stats" id="poke-stats"></div>
             </div>
         </div>
+
     </div>
     `;
 }

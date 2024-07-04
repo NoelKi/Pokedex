@@ -237,6 +237,35 @@ p {
     font-size: 28px;
 }
 
+.nav-btn {
+    height: 40px;
+    width: 40px;
+    margin: 0px 20px;
+}
+
+.nav-btn button {
+    height: 100%;
+    width: 100%;
+    background-color: #0b3a49;
+    border-style: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.arrow {
+    width: 25px;
+    padding-right: 4px;
+    height: 25px;
+    filter: invert();
+}
+
+#after-btn {
+    rotate: 180deg;
+}
+
 .reiter {
     height: 50px;
     width: 400px;
@@ -251,7 +280,7 @@ p {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     border-top: 2px solid rgba(255, 255, 255, 0.505);
     border-bottom: 2px solid rgba(255, 255, 255, 0.363);
 }
