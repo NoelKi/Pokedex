@@ -2,22 +2,20 @@ const BASE_URL = "https://pokeapi.co/api/v2/pokemon/"
 const EVO_URL = "https://pokeapi.co/api/v2/evolution-chain/"
 
 let pokemons = [];
-let evolutions = [];
-let evoNames = [];
+let evoChains = [];
+let evoData = [];
 let names = [];
 let loadCounter = 10;
-
 
 async function init() {
     showLoadingSpinner();
     await loadPokemons(10, 0);
-    await loadEvolution(10, 0);
-    console.log(evolutions);
-    console.log(pokemons);
-    loadButton();
     renderPokemons();
-    getEvoNames(100);
-    console.log(evoNames);
+    await loadEvolution(10, 0);
+    getEvoNames(10, 0);
+    await loadEvolution(198, 0);
+    getEvoNames(198, 10);
+    loadButton();
 }
 
 async function loadPokemons(amount = 1, offset = 0) {
@@ -31,26 +29,26 @@ async function loadPokemons(amount = 1, offset = 0) {
 async function loadEvolution(amount = 1, offset = 0) {
     for (let i = offset + 1; i < amount + 1 + offset; i++) {
         let pokemonResponse = await getTheEvolution(`${i}`);
-        evolutions.push(pokemonResponse);
+        evoChains.push(pokemonResponse);
     }
 }
 
 function getEvoNames(amount = 1, offset = 0) {
     for (let i = offset; i < amount + offset; i++) {
-        const evoCh = evolutions[i].chain;
+        const evoCh = evoChains[i].chain;
         const evoChTo = evoCh.evolves_to[0];
-        evoNames.push(
+        evoData.push(
             evoNamesObj(evoCh.species.name, 1, i, getImgUrl(evoCh.species.url)));
             if (evoChTo) {
                 if (evoChTo.evolves_to[0]) {
                     const evoChToTo = evoChTo.evolves_to[0];
-                    evoNames.push(
+                    evoData.push(
                         evoNamesObj(evoChTo.species.name, 2, i, getImgUrl(evoChTo.species.url)));
                         
-                    evoNames.push(
+                    evoData.push(
                         evoNamesObj(evoChToTo.species.name, 3, i, getImgUrl(evoChToTo.species.url)));
             } else {
-                evoNames.push(
+                evoData.push(
                     evoNamesObj(evoChTo.species.name, 2, i, getImgUrl(evoChTo.species.url)));
             }
         }
@@ -94,63 +92,6 @@ function renderInfoCard(index) {
     content.innerHTML = createInfoHtml(pokemon, index);
     document.body.style.overflow = "hidden";
     fillMain(index);
-}
-
-function createInfoHtml(pokemon, i) {
-    return `
-    <div class="info-container" onclick="closeInfoCard()">
-        <div class="info-card" onclick="event.stopPropagation()">
-            <div class="info-card-top">
-                <span id="info-card-id">
-                    #${pokemon.id}
-                </span>
-                <span id="info-card-name">
-                    ${pokemon.name}
-                </span>
-            </div>
-            <div class="info-card-img ${pokemon.types[0].type.name}">
-                <img id="pokemon-img" src="${pokemon.sprites.front_default}">
-            </div>
-            <div class="info-card-bottom">
-                <div class="poke-types">
-                    <img class="type-icon" src="./img/icons/${pokemon.types[0].type.name}.png">
-                    ${addAdditionalType(i)}
-                </div> 
-                <div class="reiter">
-                    <div class="reit" id="main" onclick="fillMain(${i})">main</div>
-                    <div class="reit-sep"></div>
-                    <div class="reit-mid" id="stats" onclick="fillStats(${i})">stats</div>
-                    <div class="reit-sep"></div>
-                    <div class="reit" id="evo" onclick="fillEvo(${i})">evo</div>
-                </div>
-                <div class="poke-stats" id="poke-stats"></div>
-            </div>
-        </div>
-    </div>
-    `;
-}
-
-function createCardHtml(i) {
-    pokemon = pokemons[i];
-    return `
-    <div class="card" onclick="renderInfoCard(${i})">
-        <div class="card-top">
-            <span id="pokemon_id">
-                #${pokemon.id}
-            </span>
-            <span id="pokemon-name">
-                ${pokemon.name}
-            </span>
-        </div>
-        <div class="card-img ${pokemon.types[0].type.name}">
-            <img id="pokemon-img" src="${pokemon.sprites.front_default}">
-        </div>
-        <div class="card-bottom">
-                <img class="type-icon" src="./img/icons/${pokemon.types[0].type.name}.png">
-                ${addAdditionalType(i)}
-        </div>
-    </div>
-    `;
 }
 
 async function getAPokemon(path = "") {
@@ -241,28 +182,14 @@ function loadButton() {
     button.innerHTML = createButton();
 }
 
-function createButton() {
-    return `
-    <button class="button" onclick="loadMore()">Load more ...</button>
-    `;
-}
-
 function loadButtonSpinner() {
     const button = document.getElementById('load-button');
     button.innerHTML = createButtonSpinner();
 }
 
-function createButtonSpinner() {
-    return `
-    <button class="button"><span class="loader">
-    </span></button>
-    `;
-}
-
 async function loadMore() {
     loadButtonSpinner();
     await loadPokemons(10, loadCounter);
-    await loadEvolution(10, loadCounter);
     loadCounter = loadCounter + 10;
     console.log(pokemons);
     renderPokemons();
@@ -285,86 +212,15 @@ function fillMain(i) {
     content.innerHTML += createMainRightHtml(i);
 }
 
-function createMainLeftHtml() {
-    return `
-    <div style="padding-right: 20px">
-    height:</br></br>
-    weight:</br></br>
-    base experience: </br></br>
-    abilities:</br></br>
-    </div>
-    `;
-}
-
-function createMainRightHtml(i) {
-    const pokemon = pokemons[i];
-    return `
-    <div>
-    ${pokemon.height / 10} m </br></br>
-    ${pokemon.weight / 10} kg </br></br>
-    <p class="line-break"></br></p>
-    ${pokemon.base_experience} xp</br></br>
-    ${pokemon.abilities[0].ability.name}${isAbility(i)}</br></br>
-    </div>
-    `;
-}
-
 function fillStats(i) {
     const content = document.getElementById('poke-stats');
     content.innerHTML = '';
     content.innerHTML = createStatsHtml(i);
 }
 
-function createStatsHtml(i) {
-    const pokemon = pokemons[i];
-    const highValue = getHighestValue(pokemon);
-    return `
-    ${createStatsDivHtml()}
-    ${createStatsDivBarsHtml(pokemon,highValue)}
-    ${createStatsValueHtml(pokemon)}
-    `;
-}
-
-function createStatsValueHtml(pokemon) {
-    const newDiv = document.createElement('div');
-    newDiv.className = 'bar-stats';
-    for (let i = 0; i < 6; i++) {
-        const p = document.createElement('p');
-        p.innerHTML = `${pokemon.stats[i].base_stat}`;
-        newDiv.append(p);
-    }
-    return newDiv.outerHTML;
-}
-
-function createStatsDivBarsHtml(pokemon,highValue) {
-    const newDiv = document.createElement('div');
-    newDiv.className = 'bars';
-    for (let i = 0; i < 6; i++) {
-        const outerDiv = document.createElement('div');
-        outerDiv.id = 'progressbar';
-        const innerDiv = document.createElement('div');
-        innerDiv.style.width = `${pokemon.stats[i].base_stat/highValue*100}%`;
-        outerDiv.append(innerDiv);
-        newDiv.append(outerDiv);
-    }
-    return newDiv.outerHTML;
-}
-
 function getHighestValue(pokemon) {
     const stats = pokemon.stats.map((e) => e.base_stat);
     return Math.max(...stats);
-}
-
-function createStatsDivHtml() {
-    const newDiv = document.createElement('div');
-    newDiv.className = 'bar-stats';
-    const stats = ['hp :', 'attack :', 'defense :', 'special attack :', 'special defence :', 'speed :']
-    stats.forEach((element) => {
-        const p = document.createElement('p');
-        p.innerHTML = element;
-        newDiv.append(p);
-    });
-    return newDiv.outerHTML;
 }
 
 function fillEvo(i) {
@@ -373,60 +229,37 @@ function fillEvo(i) {
     content.innerHTML = createEvoHtml(i);
 }
 
-function createEvoHtml(i) {
-    const pokemon = pokemons[i];
-    return `
-    <div class="evolution">
-        ${isEvo(i)}
-    <div>
-    `;
-}
-
 function isEvo(i) {
-    const pokemon = pokemons[i];
-    const initName = pokemon.name.toLowerCase();
-    const index = evoNames.findIndex(pokemon => pokemon.name === initName);
-    const evoChainNumber = evoNames[index].evoChain;
-    const evoChainPokemons = evoNames.filter(pokemon => pokemon.evoChain === evoChainNumber);
-    console.log(evoChainPokemons);
-    evoChainPokemons.sort((a, b) => a.evoStats - b.evoStats);
+    const evoChainPokemons = getPokemonForEvoChain(i);
     if (evoChainPokemons.length === 3) {
         return `
-        <div class="evo">
-            <img src="${evoChainPokemons[0].imgUrl}" alt="${evoChainPokemons[0].name}">
-        </div>
-        <div class="evolution-arrow">
-            <img src="./img/icons/arrow.png">
-        </div>
-        <div class="evo">
-            <img src="${evoChainPokemons[1].imgUrl}" alt="${evoChainPokemons[1].name}">
-        </div>
-        <div class="evolution-arrow">
-            <img src="./img/icons/arrow.png">
-        </div>
-        <div class="evo">
-            <img src="${evoChainPokemons[2].imgUrl}" alt="${evoChainPokemons[2].name}">
-        </div>
+        ${createEvoImgOneHtml(evoChainPokemons)}
+        ${createEvoArrowHtml()}
+        ${createEvoImgTwoHtml(evoChainPokemons)}
+        ${createEvoArrowHtml()}
+        ${createEvoImgThreeHtml(evoChainPokemons)}
         `;
     } else if (evoChainPokemons.length === 2) {
         return `
-        <div class="evo">
-            <img src="${evoChainPokemons[0].imgUrl}" alt="${evoChainPokemons[0].name}">
-        </div>
-        <div class="evolution-arrow">
-            <img src="./img/icons/arrow.png">
-        </div>
-        <div class="evo">
-            <img src="${evoChainPokemons[1].imgUrl}" alt="${evoChainPokemons[1].name}">
-        </div>
+        ${createEvoImgOneHtml(evoChainPokemons)}
+        ${createEvoArrowHtml()}
+        ${createEvoImgTwoHtml(evoChainPokemons)}
         `;
     } else {
         return `
-        <div class="evo">
-            <img src="${evoChainPokemons[0].imgUrl}" alt="${evoChainPokemons[0].name}">
-        </div>
+        ${createEvoImgOneHtml(evoChainPokemons)}
         `;
     }
+}
+
+function getPokemonForEvoChain(i) {
+    const pokemon = pokemons[i];
+    const initName = pokemon.name.toLowerCase();
+    const index = evoData.findIndex(pokemon => pokemon.name === initName);
+    const evoChainNumber = evoData[index].evoChain;
+    const evoChainPokemons = evoData.filter(pokemon => pokemon.evoChain === evoChainNumber);
+    evoChainPokemons.sort((a, b) => a.evoStats - b.evoStats);
+    return evoChainPokemons;
 }
 
 function isAbility(i) {
