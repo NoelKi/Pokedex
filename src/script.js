@@ -162,18 +162,21 @@ function closeInfoCard() {
 }
 
 function filterNames(event) {
-    console.log(event);
     const search = event.target.value.toLowerCase();
+    let counterTo = 0;
     const content = document.getElementById('content');
-    console.log(search);
     content.innerHTML = '';
-
+    hideLoadButton();
     for (let index = 0; index < names.length; index++) {
         let name = names[index];
         name = name.toLowerCase();
         if (name.includes(search)) {
             content.innerHTML += createCardHtml(index);
+            counterTo += 1;
         }
+    }
+    if (counterTo === names.length) {
+        showLoadButton();
     }
 }
 
@@ -283,4 +286,14 @@ function nextPokemon(i) {
 
 function previousPokemon(i) {
     renderInfoCard(i-1)
+}
+
+function hideLoadButton() {
+    const button = document.getElementById('load-button');
+    button.style.display = 'none';
+}
+
+function showLoadButton() {
+    const button = document.getElementById('load-button');
+    button.style.display = 'flex';
 }

@@ -552,7 +552,7 @@ p {
     }
 
     .info-card-img img{
-        height: 220px;
+        height: 210px;
     }
 
     .reiter {
@@ -563,21 +563,16 @@ p {
         width: 100px;
     }
 
-    #poke-stats {
-        width: 280px;
-        /* display: flex;
-        align-items: center;
-        flex-direction: row; */
-        /* padding: 0px; */
-    }
-
     .poke-stats {
-        width: 280px;
+        width: 290px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .evolution {
         width: 300px;
-        justify-content: space-between;
+        justify-content: center;
+        margin: 0 auto;
     }
 
     .evo {
@@ -585,13 +580,14 @@ p {
     }
 
     .evo img {
-        width: 80px;
-        height: 80px;
+        width: 85px;
+        height: 85px;
     }
 
     .evolution-arrow {
         width: 10px;
         height: 10px;
+        margin: 2px;
         padding-bottom: 25px;
     }
 
