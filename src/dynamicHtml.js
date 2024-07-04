@@ -10,6 +10,9 @@ function createInfoHtml(pokemon, i) {
                 <span id="info-card-name">
                     ${pokemon.name}
                 </span>
+                <div class="close-btn" onclick="closeInfoCard()">
+                    <img src="./img/icons/x.png" alt="x">
+                </div>
             </div>
             <div class="info-card-img ${pokemon.types[0].type.name}">
                 <img id="pokemon-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i+1}.png">
@@ -29,12 +32,12 @@ function createInfoHtml(pokemon, i) {
                         </button>
                     </div>
                 </div> 
-                <div class="reiter">
-                    <div class="reit" id="main" onclick="fillMain(${i})">main</div>
+                <div class="reiter" id="reiter">
+                    <div class="btn reit active" id="main" onclick="fillMain(${i})">main</div>
                     <div class="reit-sep"></div>
-                    <div class="reit-mid" id="stats" onclick="fillStats(${i})">stats</div>
+                    <div class="btn reit reid-mid" id="stats" onclick="fillStats(${i})">stats</div>
                     <div class="reit-sep"></div>
-                    <div class="reit" id="evo" onclick="fillEvo(${i})">evo</div>
+                    <div class="btn reit" id="evo" onclick="fillEvo(${i})">evo</div>
                 </div>
                 <div class="poke-stats" id="poke-stats"></div>
             </div>
@@ -69,10 +72,10 @@ function createCardHtml(i) {
 
 function createMainLeftHtml() {
     return `
-    <div style="padding-right: 20px">
+    <div class="media-main-left">
     height:</br></br>
     weight:</br></br>
-    base experience: </br></br>
+    base xp: </br></br>
     abilities:</br></br>
     </div>
     `;
@@ -81,10 +84,9 @@ function createMainLeftHtml() {
 function createMainRightHtml(i) {
     const pokemon = pokemons[i];
     return `
-    <div>
+    <div class="media-main-right">
     ${pokemon.height / 10} m </br></br>
     ${pokemon.weight / 10} kg </br></br>
-    <p class="line-break"></br></p>
     ${pokemon.base_experience} xp</br></br>
     ${pokemon.abilities[0].ability.name}${isAbility(i)}</br></br>
     </div>

@@ -92,6 +92,7 @@ function renderInfoCard(index) {
     content.innerHTML = createInfoHtml(pokemon, index);
     document.body.style.overflow = "hidden";
     fillMain(index);
+    setActive();
 }
 
 async function getAPokemon(path = "") {
@@ -296,4 +297,17 @@ function hideLoadButton() {
 function showLoadButton() {
     const button = document.getElementById('load-button');
     button.style.display = 'flex';
+}
+
+function setActive() {
+    const btnContainer = document.getElementById("reiter");
+    const btns = btnContainer.getElementsByClassName("btn");
+
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function() {
+          var current = document.getElementsByClassName("active");
+          current[0].className = current[0].className.replace(" active", "");
+          this.className += " active";
+        });
+      }
 }
