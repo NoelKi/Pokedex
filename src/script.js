@@ -13,9 +13,9 @@ async function init() {
     renderPokemons();
     await loadEvolution(10, 0);
     getEvoNames(10, 0);
-    await loadEvolution(198, 0);
-    getEvoNames(198, 10);
     loadButton();
+    await loadEvolution(198, 10);
+    getEvoNames(198, 10);
 }
 
 async function loadPokemons(amount = 1, offset = 0) {
