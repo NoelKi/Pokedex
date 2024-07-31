@@ -564,6 +564,14 @@ p {
     }
 }
 
+@media(max-width:595px) {
+    #content {
+        padding: 10px;
+        min-height: calc(100vh - 200px);
+    }
+}
+
+
 @media(max-width:580px) {
     .info-card {
         width: 300px;
@@ -662,11 +670,9 @@ p {
     .close-btn {
         display: flex;
     }
-}
 
-@media(max-width:595px) {
     #content {
-        padding: 10px;
+        min-height: calc(100vh - 130px);
     }
 }
 
